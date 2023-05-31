@@ -1,1 +1,1 @@
-start cmd.exe /c %~dp0/KarbowanecWallet.exe --portable
+start cmd.exe /c %~dp0/LuckycoinWallet.exe --portable

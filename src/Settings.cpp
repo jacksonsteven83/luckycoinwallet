@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2015 The Cryptonote developers
 // Copyright (c) 2015-2016 XDN developers
-// Copyright (c) 2016-2022 The Karbowanec developers
+// Copyright (c) 2023 The Luckycoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -52,10 +52,9 @@ const char OPTION_WALLET_RPC_USER[] = "walletRpcUser";
 const char OPTION_WALLET_RPC_PASSWORD[] = "walletRpcPassword";
 
 const QVector<NodeSetting> DEFAULT_NODES_LIST = {
-  {"node.karbo.io", 32348, "/", false},
-  {"node.karbo.org", 32348, "/", false},
-  {"node.karbowanec.com", 32348, "/", false},
-  {"free.rublin.org", 32348, "/", false}
+  {"seed1.jokercoin.org", 32348, "/", false},
+  {"seed2.jokercoin.org", 32348, "/", false},
+  {"seed3.jokercoin.org", 32348, "/", false}
 };
 
 Settings& Settings::instance() {

@@ -260,7 +260,7 @@
          <string>Spendable balance</string>
         </property>
         <property name="text">
-         <string notr="true">Available: 0.00 KRB</string>
+         <string notr="true">Available: 0.00 LKC</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>
@@ -319,7 +319,7 @@
          <string>Awaiting network confirmation</string>
         </property>
         <property name="text">
-         <string notr="true">Pending: 0.00 KRB</string>
+         <string notr="true">Pending: 0.00 LKC</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>
@@ -378,7 +378,7 @@
          <string>Spendable only with zero privacy level</string>
         </property>
         <property name="text">
-         <string notr="true">Unmixable: 0.00 KRB</string>
+         <string notr="true">Unmixable: 0.00 LKC</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>
@@ -434,7 +434,7 @@
          <string>Total balance</string>
         </property>
         <property name="text">
-         <string notr="true">Total: 0.00 KRB</string>
+         <string notr="true">Total: 0.00 LKC</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>

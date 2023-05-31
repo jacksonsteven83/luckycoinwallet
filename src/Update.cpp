@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020 The Karbowanec developers
+// Copyright (c) 2023 The Luckycoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +25,7 @@ void Updater::checkForUpdate()
     {
         connect(manager, SIGNAL(finished(QNetworkReply*)),
                 this, SLOT(replyFinished(QNetworkReply*)));
-        QNetworkRequest request((QUrl(KARBO_UPDATE_URL)));
+        QNetworkRequest request((QUrl(LUCKYCOIN_UPDATE_URL)));
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         manager->get(request);
     }
@@ -62,7 +62,7 @@ void Updater::replyFinished (QNetworkReply *reply)
              if (QMessageBox::warning(nullptr, QObject::tr("New version available"),
                                       QObject::tr("There is an update available.\nDo you want to go to the download page?"),
                                       QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
-                 QDesktopServices::openUrl(QUrl(KARBO_DOWNLOAD_URL));
+                 QDesktopServices::openUrl(QUrl(LUCKYCOIN_DOWNLOAD_URL));
              }
         }
     }

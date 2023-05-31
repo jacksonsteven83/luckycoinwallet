@@ -452,7 +452,7 @@
      <item>
       <widget class="QLabel" name="m_helpLabel">
        <property name="text">
-        <string>Wallet optimization is a background task performed in order to aggregate transactions outputs that are below optimization target into bigger ones. It allows to send larger amounts of KRB within one transaction. Wallet optimization is free for all users but takes some time.</string>
+        <string>Wallet optimization is a background task performed in order to aggregate transactions outputs that are below optimization target into bigger ones. It allows to send larger amounts of LKC within one transaction. Wallet optimization is free for all users but takes some time.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

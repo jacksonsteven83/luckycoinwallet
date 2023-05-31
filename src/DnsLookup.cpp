@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2017 The Karbovanets developers
+// Copyright (c) 2023 The Luckycoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -39,7 +39,7 @@ void DnsManager::handleTxtRecords(){
   foreach (const QDnsTextRecord &record, m_dns->textRecords()) {
     foreach (const QByteArray &ba, record.values()) {
       QString txt = QString::fromUtf8(ba);
-      if(txt.contains("oa1:krb")) {
+      if(txt.contains("oa1:lkc")) {
         int s1 = txt.indexOf("recipient_address=",0,Qt::CaseInsensitive);
         int s2 = txt.indexOf("recipient_name=",0,Qt::CaseInsensitive);
         QString address = txt.mid(s1+18,95);

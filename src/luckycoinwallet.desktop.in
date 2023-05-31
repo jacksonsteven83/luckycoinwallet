@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Luckycoin
+GenericName=Luckycoin
+Name[cn]=幸运币
+Comment=Luckycoin wallet
+Comment[cn]=幸运币钱包
+Exec=@WALLET_NAME@ %U
+Terminal=false
+Type=Application
+Icon=karbowanec
+MimeType=x-scheme-handler/luckycoin;
+Categories=Office;Finance;
+Version=@WALLET_VERSION@

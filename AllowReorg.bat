@@ -1,1 +1,1 @@
-start cmd.exe /c %~dp0/KarbowanecWallet.exe --allow-reorg
+start cmd.exe /c %~dp0/LuckycoinWallet.exe --allow-reorg

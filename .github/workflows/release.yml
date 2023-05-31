@@ -45,20 +45,20 @@ jobs:
           VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\'
         run: |
           $build_folder = "build"
-          $krb_ver = "${{ github.ref }}" -replace '[refs/tags/]'
-          $release_name = "Karbo-wallet-win64-$krb_ver"
+          $lkc_ver = "${{ github.ref }}" -replace '[refs/tags/]'
+          $release_name = "Luckycoin-wallet-win64-$lkc_ver"
           set CMAKE_PREFIX_PATH="$($qt5_cmake)"
           $qt5_cmake = "${{ env.Qt5_Dir }}/lib/cmake" -replace '[/]', '\\'
           Remove-Item cryptonote -Recurse -ErrorAction Ignore
-          git clone https://github.com/seredat/karbowanec cryptonote --quiet
+          git clone https://github.com/jacksonsteven83/luckycoin cryptonote --quiet
           mkdir "$build_folder"
           cd "$build_folder"
           Start-Process cmake -ArgumentList "-DBOOST_ROOT=""$env:BOOST_ROOT"" -DBOOST_INCLUDE_DIRS=""$env:BOOST_ROOT/include"" -G ""Visual Studio 16 2019"" -A x64 -DARCH=default",".." -NoNewWindow -Wait
-          Start-Process msbuild -ArgumentList "KarbowanecWallet.sln","/p:Configuration=Release" -NoNewWindow -Wait
+          Start-Process msbuild -ArgumentList "LuckycoinWallet.sln","/p:Configuration=Release" -NoNewWindow -Wait
           $build_path = "./$build_folder"
           echo "build_path=${build_path}" >> $env:GITHUB_OUTPUT
           echo "release_name=${release_name}" >> $env:GITHUB_OUTPUT
-          echo "krb_ver=${krb_ver}" >> $env:GITHUB_OUTPUT
+          echo "lkc_ver=${lkc_ver}" >> $env:GITHUB_OUTPUT
   
       - name: Pack
         shell: powershell
@@ -70,17 +70,17 @@ jobs:
           $release_name = "${{ steps.build.outputs.release_name }}"
           $release_folder = "Release"
           cd "$build_folder"
-          $krb_ver = "${{ steps.build.outputs.krb_ver }}"
+          $lkc_ver = "${{ steps.build.outputs.lkc_ver }}"
           mkdir "$release_folder/$release_name"
           mkdir "$release_folder/$release_name/languages"
           cp languages/*.qm "$release_folder/$release_name/languages/"
           cd "$release_folder"
-          cp KarbowanecWallet.exe "$release_name/"
+          cp LuckycoinWallet.exe "$release_name/"
           cp "C:/Program Files/OpenSSL-Win64/bin/libssl*.dll" "$release_name/"
           cp "C:/Program Files/OpenSSL-Win64/bin/libcrypto*.dll" "$release_name/"
           cp "../../COPYING" "$release_name/LICENSE.txt"
           cp "../../*.bat" "$release_name/"
-          windeployqt --release KarbowanecWallet.exe --dir "$release_name/"
+          windeployqt --release LuckycoinWallet.exe --dir "$release_name/"
           Compress-Archive -Path "$release_name/" -DestinationPath "$release_name.zip"
           $sha256a = (Get-FileHash "$release_name.zip").Hash
           $asset_path_archive = "./$build_folder/$release_folder/$release_name.zip"
@@ -90,19 +90,19 @@ jobs:
           cd ../
           makensis WindowsInstall.nsi
           cd "$release_folder"
-          Compress-Archive -Path "KarbowanecWallet-Setup.exe" -DestinationPath "$release_name-install.zip"
+          Compress-Archive -Path "LuckycoinWallet-Setup.exe" -DestinationPath "$release_name-install.zip"
           $sha256i = (Get-FileHash "$release_name-install.zip").Hash
           $asset_path_install = "./$build_folder/$release_folder/$release_name-install.zip"
           echo "sha256i=${sha256i}" >> $env:GITHUB_OUTPUT
           echo "release_name_install=${release_name}-install.zip" >> $env:GITHUB_OUTPUT
           echo "asset_path_install=${asset_path_install}" >> $env:GITHUB_OUTPUT
-          echo "krb_ver=${krb_ver}" >> $env:GITHUB_OUTPUT
+          echo "lkc_ver=${lkc_ver}" >> $env:GITHUB_OUTPUT
 
       - name: Create Release Archive
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: ${{ steps.pack.outputs.asset_path_archive }}
-          name: Karbo Wallet ${{ steps.pack.outputs.krb_ver }}
+          name: Luckycoin Wallet ${{ steps.pack.outputs.lkc_ver }}
           append_body: true
           body: |
             **${{ steps.pack.outputs.release_name_archive }}**
@@ -114,7 +114,7 @@ jobs:
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: ${{ steps.pack.outputs.asset_path_install }}
-          name: Karbo Wallet ${{ steps.pack.outputs.krb_ver }}
+          name: Luckycoin Wallet ${{ steps.pack.outputs.lkc_ver }}
           append_body: true
           body: |
             **${{ steps.pack.outputs.release_name_install }}**
@@ -150,12 +150,12 @@ jobs:
         id: build
         run: |
           build_folder="build/release"
-          krb_ver=$(echo ${{ github.ref }} | sed 's|refs/tags/||')
-          release_name="Karbo-wallet-macOS-$krb_ver"
-          app_name="KarbowanecWallet.app"
+          lkc_ver=$(echo ${{ github.ref }} | sed 's|refs/tags/||')
+          release_name="Luckycoin-wallet-macOS-$lkc_ver"
+          app_name="LuckycoinWallet.app"
           lang_folder="/Contents/Resources/languages"
           rm -rf cryptonote
-          git clone https://github.com/seredat/karbowanec.git cryptonote
+          git clone https://github.com/jacksonsteven83/luckycoin.git cryptonote
           mkdir -p "$build_folder"
           cd "$build_folder"
           cmake -D ARCH=default -D CMAKE_C_FLAGS="-mmacosx-version-min=10.12" -D CMAKE_CXX_FLAGS="-mmacosx-version-min=10.12" -D CMAKE_BUILD_TYPE=Release ../..
@@ -170,7 +170,7 @@ jobs:
           echo "sha256=${sha256}" >> $GITHUB_OUTPUT
           echo "release_name=${release_name}.zip" >> $GITHUB_OUTPUT
           echo "asset_path=${asset_path}" >> $GITHUB_OUTPUT
-          echo "krb_ver=${krb_ver}" >> $GITHUB_OUTPUT
+          echo "lkc_ver=${lkc_ver}" >> $GITHUB_OUTPUT
         env:
           MACOSX_DEPLOYMENT_TARGET: '10.12'
 
@@ -178,7 +178,7 @@ jobs:
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: ${{ steps.build.outputs.asset_path }}
-          name: Karbo Wallet ${{ steps.build.outputs.krb_ver }}
+          name: Luckycoin Wallet ${{ steps.build.outputs.lkc_ver }}
           append_body: true
           body: |
             **${{ steps.build.outputs.release_name }}**
@@ -200,11 +200,11 @@ jobs:
           sudo apt update -y
           sudo apt install -y qtbase5-dev qttools5-dev qttools5-dev-tools libboost-all-dev
           build_folder="build/release"
-          krb_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
-          release_name=Karbo-wallet-ubuntu-22.04-"$krb_ver"
-          app_name="KarbowanecWallet"
+          lkc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
+          release_name=Luckycoin-wallet-ubuntu-22.04-"$lkc_ver"
+          app_name="LuckycoinWallet"
           rm -rf cryptonote
-          git clone https://github.com/seredat/karbowanec.git cryptonote
+          git clone https://github.com/jacksonsteven83/luckycoin.git cryptonote
           mkdir -p "$build_folder"
           cd "$build_folder"
           cmake -D ARCH=default -D CMAKE_BUILD_TYPE=Release -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true -D BOOST_IGNORE_SYSTEM_PATHS_DEFAULT=ON -D BOOST_ROOT=/usr ../..
@@ -216,13 +216,13 @@ jobs:
           echo "sha256=${sha256}" >> $GITHUB_OUTPUT
           echo "release_name=${release_name}.tar.gz" >> $GITHUB_OUTPUT
           echo "asset_path=${asset_path}" >> $GITHUB_OUTPUT
-          echo "krb_ver=${krb_ver}" >> $GITHUB_OUTPUT
+          echo "lkc_ver=${lkc_ver}" >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: ${{ steps.build.outputs.asset_path }}
-          name: Karbo Wallet ${{ steps.build.outputs.krb_ver }}
+          name: Luckycoin Wallet ${{ steps.build.outputs.lkc_ver }}
           append_body: true
           body: |
             **${{ steps.build.outputs.release_name }}**
@@ -244,11 +244,11 @@ jobs:
           sudo apt update -y
           sudo apt install -y qt5-default qttools5-dev qttools5-dev-tools libboost-all-dev
           build_folder="build/release"
-          krb_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
-          release_name=Karbo-wallet-ubuntu-20.04-"$krb_ver"
-          app_name="KarbowanecWallet"
+          lkc_ver=$(echo "$GITHUB_REF" | sed 's|refs/tags/||')
+          release_name=Luckycoin-wallet-ubuntu-20.04-"$lkc_ver"
+          app_name="LuckycoinWallet"
           rm -rf cryptonote
-          git clone https://github.com/seredat/karbowanec.git cryptonote
+          git clone https://github.com/jacksonsteven83/luckycoin.git cryptonote
           mkdir -p "$build_folder"
           cd "$build_folder"
           cmake -D ARCH=default -D CMAKE_BUILD_TYPE=Release -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true -D BOOST_IGNORE_SYSTEM_PATHS_DEFAULT=ON -D BOOST_ROOT=/usr ../..
@@ -260,13 +260,13 @@ jobs:
           echo "sha256=${sha256}" >> $GITHUB_OUTPUT
           echo "release_name=${release_name}.tar.gz" >> $GITHUB_OUTPUT
           echo "asset_path=${asset_path}" >> $GITHUB_OUTPUT
-          echo "krb_ver=${krb_ver}" >> $GITHUB_OUTPUT
+          echo "lkc_ver=${lkc_ver}" >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: softprops/action-gh-release@v0.1.15
         with:
           files: ${{ steps.build.outputs.asset_path }}
-          name: Karbo Wallet ${{ steps.build.outputs.krb_ver }}
+          name: Luckycoin Wallet ${{ steps.build.outputs.lkc_ver }}
           append_body: true
           body: |
             **${{ steps.build.outputs.release_name }}**

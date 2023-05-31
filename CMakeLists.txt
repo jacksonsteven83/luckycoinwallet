@@ -128,8 +128,8 @@ configure_file(
     @ONLY
 )
 configure_file(
-    "${CMAKE_CURRENT_LIST_DIR}/src/karbowanecwallet.desktop.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/karbowanecwallet.desktop"
+    "${CMAKE_CURRENT_LIST_DIR}/src/LuckycoinWallet.desktop.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/LuckycoinWallet.desktop"
     @ONLY
 )
 
@@ -548,9 +548,9 @@ elseif (UNIX)
 
     install(PROGRAMS ${CMAKE_BINARY_DIR}/${PROJECT_NAME} DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-    install(FILES ${CMAKE_BINARY_DIR}/karbowanecwallet.desktop DESTINATION share/applications)
+    install(FILES ${CMAKE_BINARY_DIR}/LuckycoinWallet.desktop DESTINATION share/applications)
     install(FILES src/images/karbowanez.png DESTINATION share/pixmaps RENAME karbowanec.png)
-    install(FILES copyright DESTINATION share/doc/karbowanecwallet)
+    install(FILES copyright DESTINATION share/doc/LuckycoinWallet)
     install(DIRECTORY "${CMAKE_BINARY_DIR}/languages" DESTINATION /opt/karbo/ FILES_MATCHING PATTERN "*.qm")
 
     if (RPMBUILD)
@@ -560,8 +560,8 @@ elseif (UNIX)
         set(CPACK_RPM_PACKAGE_LICENSE "MIT")
         set(CPACK_RPM_PACKAGE_GROUP Office)
         set(CPACK_RPM_PACKAGE_REQUIRES "qt5-qtbase >= 5.3.2, qt5-qtbase-gui >= 5.3.2")
-        set(CPACK_RPM_PACKAGE_SUMMARY "Karbowanec KRB wallet")
-        set(CPACK_RPM_PACKAGE_DESCRIPTION "Karbowanec KRB wallet
+        set(CPACK_RPM_PACKAGE_SUMMARY "Karbowanec LKC wallet")
+        set(CPACK_RPM_PACKAGE_DESCRIPTION "Karbowanec LKC wallet
  Karbowanec is Ukrainian decentrilized, privacy oriented peer-to-peer
  cryptocurrency. It is open-source, nobody owns or controls Karbowanec
  and everyone can take part.")
@@ -573,7 +573,7 @@ elseif (UNIX)
 	set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <krbcoin@ukr.net>")
 	set(CPACK_DEBIAN_PACKAGE_SECTION Office)
 	set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-	set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Karbowanec KRB wallet
+	set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Karbowanec LKC wallet
  Karbowanec is Ukrainian decentralized, privacy oriented peer-to-peer
  cryptocurrency. It is open-source, nobody owns or controls Karbowanec
  and everyone can take part.")
@@ -583,7 +583,7 @@ elseif (WIN32)
     set(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
     include(InstallRequiredSystemLibraries)
 
-	set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Karbowanec KRB wallet
+	set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Karbowanec LKC wallet
  Karbowanec is Ukrainian decentralized, privacy oriented peer-to-peer
  cryptocurrency. It is open-source, nobody owns or controls Karbowanec
  and everyone can take part.")

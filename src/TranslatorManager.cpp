@@ -23,9 +23,9 @@ TranslatorManager::TranslatorManager()
   m_langPath = QApplication::applicationDirPath();
   m_langPath = m_langPath + "/../Resources/languages/";
 #elif defined(__FreeBSD__)
-  m_langPath = "/usr/local/share/karbo/karbowallet/languages";
+  m_langPath = "/usr/local/share/luckycoin/luckycoinwallet/languages";
 #else
-  m_langPath = "/opt/karbo/languages";
+  m_langPath = "/opt/luckycoin/languages";
 #endif
 
     QDir dir(m_langPath);
